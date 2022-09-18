@@ -26,7 +26,7 @@ function FormElement() {
     return (
         <div>
         <form className={styles.formholder}>
-            <h1>Employee Data</h1>
+            <h2>Enter Employee Data</h2>
             <label>First Name:</label>
             <input type="text" name='fname' value = {formData.fname} onChange={(e)=>handleChange(e.target.name, e.target.value)}></input>
             <label>Last Name:</label>

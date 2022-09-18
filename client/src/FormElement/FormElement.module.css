@@ -15,6 +15,16 @@
    text-align: center;
  }
 
+ h2 {
+  border-bottom: 1px solid white;
+  color: #3d3d3d;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: 5600;
+  line-height: 24px;
+  text-align: left;
+}
+
  form {
    background: white;
    border: 1px solid #dedede;
