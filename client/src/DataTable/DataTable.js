@@ -44,17 +44,21 @@ const tableData = data.map(el => {
 })
 
   return (
-    <table>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Age</th>
-      <th>Job Title</th>
-      <th>Salary</th>
-      <th>Actions</th>
-    </tr>
-    {tableData}
-  </table> 
+    <>
+        <h1>Employee Data</h1>
+        <table>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Age</th>
+          <th>Job Title</th>
+          <th>Salary</th>
+          <th>Actions</th>
+        </tr>
+        {tableData}
+        </table>
+        <button className={styles.addbutton}> Add Employee</button>
+    </>
   )
 }
 
