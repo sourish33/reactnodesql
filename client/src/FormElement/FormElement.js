@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import Button from "../Button/Button"
 import styles from "./FormElement.module.css"
 
 function FormElement() {
@@ -72,9 +73,9 @@ function FormElement() {
                         handleChange(e.target.name, e.target.value)
                     }
                 ></input>
-                <button className={styles.submitButton} onClick={handleClick}>
+                <Button type={'green'} clickAction={handleClick}>
                     Submit
-                </button>
+                </Button>
             </form>
         </div>
     )
