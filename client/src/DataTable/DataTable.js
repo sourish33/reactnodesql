@@ -53,9 +53,6 @@ const DataTable = () => {
                     <Button type={"red"} clickAction={handleClick}>
                         Delete
                     </Button>
-                    <Button type={"green"} clickAction={handleClick}>
-                        View
-                    </Button>
                 </td>
             </tr>
         )

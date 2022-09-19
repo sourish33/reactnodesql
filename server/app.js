@@ -6,26 +6,33 @@ const app = express()
 // get the client
 const mysql = require("mysql2/promise")
 
-// get the promise implementation, we will use bluebird
-// const bluebird = require("bluebird")
+/*
+check out https://evertpot.com/executing-a-mysql-query-in-nodejs/
+
+*/
+const pool = mysql.createPool({
+  host: "localhost",
+  user: "root",
+  database: "employees",
+  password: "jcU96mo",
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit:0
+})
+
+app.get("/", (req, res)=>{
+  res.json("Hello from the other side!")
+})
 
 app.get("/users", async (req, res) => {
-    try {
-        // create the connection to database
-        const connection = await mysql.createConnection({
-            host: "localhost",
-            user: "root",
-            database: "employees",
-            password: "jcU96mo",
-        })
-
-        const [rows, fields] = await connection.execute(
-            "SELECT * FROM employee_table"
-        )
-        return res.status(200).json(rows)
-    } catch (error) {
-        console.log(error)
-    }
+  const q = "SELECT * FROM employee_table"
+  try {
+    const [result, field] = await pool.query(q)
+      return res.status(200).json(result)
+  } catch (error) {
+      return res.status(404).json(error)
+  }
+  
 })
 
 app.listen(PORT, () => {
