@@ -75,7 +75,7 @@ function FormElement() {
                         handleChange(e.target.name, e.target.value)
                     }
                 ></input>
-                <div><Button variant="primary" onClick={handleClick}>Submit</Button></div>
+                <div className={styles.buttonholder}><Button variant="primary" onClick={handleClick}>Submit</Button></div>
 
             </form>
         </div>
