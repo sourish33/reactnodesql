@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import Button from 'react-bootstrap/Button';
 import styles from "./FormElement.module.css"
 
 function FormElement() {
@@ -74,9 +75,8 @@ function FormElement() {
                         handleChange(e.target.name, e.target.value)
                     }
                 ></input>
-                <button type={'green'} onClick={handleClick}>
-                    Submit
-                </button>
+                <div><Button variant="primary" onClick={handleClick}>Submit</Button></div>
+
             </form>
         </div>
     )
