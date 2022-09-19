@@ -1,6 +1,5 @@
 import React from "react"
 import { UserContext } from "../App"
-import Button from "../Button/Button"
 import styles from "./DataTable.module.css"
 
 const data = [
@@ -47,12 +46,12 @@ const DataTable = () => {
                 <td>{el["job_title"]}</td>
                 <td>{el.salary}</td>
                 <td>
-                    <Button type={"blue"} clickAction={handleClick}>
+                    <button onClick={handleClick}>
                         Edit
-                    </Button>
-                    <Button type={"red"} clickAction={handleClick}>
+                    </button>
+                    <button onClick={handleClick}>
                         Delete
-                    </Button>
+                    </button>
                 </td>
             </tr>
         )
@@ -72,9 +71,9 @@ const DataTable = () => {
                 </tr>
                 {tableData}
             </table>
-            <Button type={"blue"} clickAction={navigateToAdd}>
+            <button onClick={navigateToAdd}>
                 Add Employee
-            </Button>
+            </button>
         </>
     )
 }
