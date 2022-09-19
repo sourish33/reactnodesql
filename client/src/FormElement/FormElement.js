@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import Button from 'react-bootstrap/Button';
 import styles from "./FormElement.module.css"
 
 function FormElement() {
@@ -27,7 +26,6 @@ function FormElement() {
 
     return (
         <div>
-            <h1>Employee Data Entry</h1>
             <form className={styles.formholder}>
                 <h2>Enter Employee Data</h2>
                 <label>First Name:</label>
@@ -75,7 +73,7 @@ function FormElement() {
                         handleChange(e.target.name, e.target.value)
                     }
                 ></input>
-                <div className={styles.buttonholder}><Button variant="primary" onClick={handleClick}>Submit</Button></div>
+                <div className={styles.buttonholder}><button type="button" className="btn btn-primary mt-2" onClick={handleClick}>Submit</button></div>
 
             </form>
         </div>

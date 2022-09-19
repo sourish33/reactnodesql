@@ -3,6 +3,7 @@ import styles from './App.module.css'
 import DataTable from './DataTable/DataTable';
 import FormElement from './FormElement/FormElement';
 import {Route, Routes, useNavigate} from 'react-router-dom'
+import Navigation from './Navbar/Navigation';
 
 export const UserContext = React.createContext();
 
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <UserContext.Provider value={navigateToAdd}>
+      <Navigation/>
     <div className={styles.container}>
       <Routes>
         <Route path="/" element = {<DataTable/>}/>
