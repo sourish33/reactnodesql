@@ -62,9 +62,8 @@ const tableData = data.map(el => {
         </table>
         <Button
             type={'blue'}
-            text={"Add Employee"}
             clickAction = {AddEmployee}
-        />
+        >Add Employee</Button>
     </>
   )
 }
