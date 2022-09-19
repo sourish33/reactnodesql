@@ -23,6 +23,8 @@ function FormElement() {
         alert(data)
     }
 
+    
+
     return (
         <div>
             <h1>Employee Data Entry</h1>

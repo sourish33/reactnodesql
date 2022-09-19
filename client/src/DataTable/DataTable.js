@@ -1,4 +1,5 @@
 import React from "react"
+import { UserContext } from "../App"
 import Button from "../Button/Button"
 import styles from "./DataTable.module.css"
 
@@ -31,6 +32,8 @@ const data = [
 ]
 
 const DataTable = () => {
+
+    const navigateToAdd = React.useContext(UserContext); 
     const handleClick = () => {
         window.alert("Hello")
     }
@@ -72,7 +75,7 @@ const DataTable = () => {
                 </tr>
                 {tableData}
             </table>
-            <Button type={"blue"} clickAction={handleClick}>
+            <Button type={"blue"} clickAction={navigateToAdd}>
                 Add Employee
             </Button>
         </>
