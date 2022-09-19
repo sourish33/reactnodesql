@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../Button/Button'
 import styles from './DataTable.module.css'
 
 const DataTable = () => {
@@ -28,7 +29,9 @@ const DataTable = () => {
         }
   ]
 
-
+const AddEmployee = () =>{
+    window.alert("Hello")
+}
 
 const tableData = data.map(el => {
     return(
@@ -57,7 +60,11 @@ const tableData = data.map(el => {
         </tr>
         {tableData}
         </table>
-        <button className={styles.addbutton}> Add Employee</button>
+        <Button
+            type={'blue'}
+            text={"Add Employee"}
+            clickAction = {AddEmployee}
+        />
     </>
   )
 }

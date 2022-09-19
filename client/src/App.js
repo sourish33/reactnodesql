@@ -5,21 +5,13 @@ import {Route, Routes} from 'react-router-dom'
 
 
 function App() {
-  let component
-  switch (window.location.pathname){
-    case "/":
-      component = <DataTable/>
-      break
-    case "/add":
-      component = <FormElement/>
-      break
-    default:
-      component = <DataTable/>
-  }
 
   return (
     <div className={styles.container}>
-      {component}
+      <Routes>
+        <Route path="/" element = {<DataTable/>}/>
+        <Route path="/add" element = {<FormElement/>}/>
+      </Routes>
     </div>
   );
 }
