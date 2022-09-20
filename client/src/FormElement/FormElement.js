@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import Alert from 'react-bootstrap/Alert';
 // import styles from "./FormElement.module.css"
 
 function FormElement() {
@@ -96,6 +97,9 @@ function FormElement() {
             
                     <div><button type="button" className="btn btn-primary mt-2" onClick={handleClick}>Submit</button></div>
                 </form>
+                <Alert variant={'success'} className="mt-4 col-lg-6">
+                        This is a alert—check it out!
+                </Alert>
         </div>
     )
 }
