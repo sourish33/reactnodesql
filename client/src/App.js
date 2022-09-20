@@ -2,7 +2,7 @@ import React from 'react';
 import DataTable from './DataTable/DataTable';
 import FormElement from './FormElement/FormElement';
 import {Route, Routes, useNavigate} from 'react-router-dom'
-import Navigation from './Navbar/Navigation';
+import NavigationBar from './Navbar/NavigationBar';
 
 export const UserContext = React.createContext();
 
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <UserContext.Provider value={{navigateToAdd, navigateToHome}}>
-      <Navigation/>
+      <NavigationBar/>
     <div className='container'>
       <Routes>
         <Route path="/" element = {<DataTable/>}/>
