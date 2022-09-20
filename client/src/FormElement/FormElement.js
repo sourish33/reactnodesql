@@ -25,7 +25,7 @@ function FormElement() {
     
 
     return (
-        <div>
+        <div className="mt-4 ml-0">
             <form className={styles.formholder}>
                 <h2>Enter Employee Data</h2>
                 <label>First Name:</label>

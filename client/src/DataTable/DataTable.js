@@ -1,6 +1,5 @@
 import React from "react"
 import { UserContext } from "../App"
-import styles from "./DataTable.module.css"
 
 const data = [
     {
@@ -31,7 +30,7 @@ const data = [
 ]
 
 const DataTable = () => {
-    const navigateToAdd = React.useContext(UserContext)
+    const {navigateToAdd} = React.useContext(UserContext)
     const handleClick = () => {
         window.alert("Hello")
     }
@@ -45,15 +44,15 @@ const DataTable = () => {
                 <td>{el.age}</td>
                 <td>{el["job_title"]}</td>
                 <td>{el.salary}</td>
-                <td className="d-flex justify-content-around">
-                    <div className="btn-toolbar" role="group">
-                        <button type="button" className="btn btn-primary mx-2">
+                <td className="d-flex justify-content-center">
+                    <div className="btn-toolbar">
+                        <button type="button" className="btn btn-primary mx-1 my-1">
                             View
                         </button>
-                        <button type="button" className="btn btn-secondary mx-2">
+                        <button type="button" className="btn btn-secondary mx-1 my-1">
                             Edit
                         </button>
-                        <button type="button" className="btn btn-danger mx-2">
+                        <button type="button" className="btn btn-danger mx-1 my-1">
                             Delete
                         </button>
                     </div>
@@ -63,8 +62,8 @@ const DataTable = () => {
     })
 
     return (
-        <>
-            <table className="table table-bordered table-striped">
+        <> 
+            <table className="table table-bordered border border-2 table-striped mt-4 ml-0">
                 <thead>
                     <tr>
                         <th scope="col">#</th>

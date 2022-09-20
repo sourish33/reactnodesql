@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './App.module.css'
 import DataTable from './DataTable/DataTable';
 import FormElement from './FormElement/FormElement';
 import {Route, Routes, useNavigate} from 'react-router-dom'
@@ -16,10 +15,14 @@ function App() {
     navigate("/add")
   }
 
+  const navigateToHome = () =>{
+    navigate("/")
+  }
+
   return (
-    <UserContext.Provider value={navigateToAdd}>
+    <UserContext.Provider value={{navigateToAdd, navigateToHome}}>
       <Navigation/>
-    <div className={styles.container}>
+    <div className='container'>
       <Routes>
         <Route path="/" element = {<DataTable/>}/>
         <Route path="/add" element = {<FormElement/>}/>
