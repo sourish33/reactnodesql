@@ -1,7 +1,9 @@
 const express = require("express")
+const cors = require('cors')
 const PORT = 3001
 
 const app = express()
+app.use(cors())
 
 // get the client
 const mysql = require("mysql2/promise")

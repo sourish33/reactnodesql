@@ -1,36 +1,48 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { UserContext } from "../App"
 
-const data = [
-    {
-        id: 1,
-        fname: "Sacha",
-        lname: "LittleFeather",
-        age: 31,
-        job_title: "Copy writer",
-        salary: 37221,
-    },
+// const data = [
+//     {
+//         id: 1,
+//         fname: "Sacha",
+//         lname: "LittleFeather",
+//         age: 31,
+//         job_title: "Copy writer",
+//         salary: 37221,
+//     },
 
-    {
-        id: 2,
-        fname: "Sonam",
-        lname: "Malvia",
-        age: 32,
-        job_title: "Copy reader",
-        salary: 40051,
-    },
-    {
-        id: 3,
-        fname: "Gulab",
-        lname: "Golgappa",
-        age: 38,
-        job_title: "Copy writer",
-        salary: 37552,
-    },
-]
+//     {
+//         id: 2,
+//         fname: "Sonam",
+//         lname: "Malvia",
+//         age: 32,
+//         job_title: "Copy reader",
+//         salary: 40051,
+//     },
+//     {
+//         id: 3,
+//         fname: "Gulab",
+//         lname: "Golgappa",
+//         age: 38,
+//         job_title: "Copy writer",
+//         salary: 37552,
+//     },
+// ]
 
 const DataTable = () => {
     const {navigateToAdd} = React.useContext(UserContext)
+
+    const [data, setData] = useState([])
+
+    useEffect(()=>{
+        const fetchData = async () =>{
+            const data = await fetch('http://localhost:3001/users')
+            const datajson = await data.json()
+            console.log(datajson)
+            setData(x=>[...x, ...datajson])
+        }
+        fetchData().catch(console.error)
+    }, [])
 
     const tableData = data.map((el) => {
         return (
