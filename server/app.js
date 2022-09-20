@@ -38,22 +38,56 @@ app.get("/users", async (req, res) => {
 })
 
 app.post("/user", async (req, res) =>{
-  // console.log(Object.keys(req))
-  // console.log(req.params)
-  // console.log("****************")
-  // console.log(req.query)
-  // console.log("****************")
-  // console.log(req.body)
   const {fname, lname, age, job_title, salary} = req.body
-  const data = `${fname} ${lname}, aged ${age} works as ${job_title} and makes $${salary}/year`
-  console.log(data)
-  res.send({status: "ok"})
+  // const data = `${fname} ${lname}, aged ${age} works as ${job_title} and makes $${salary}/year`
+  // console.log(data)
+  //INSERT INTO `employees`.`employee_table` (`fname`, `lname`, `age`, `job_title`, `salary`) VALUES ('Danny', 'Bonaduce', '89', 'Actor', '23466')
+  const q = 'INSERT INTO `employees`.`employee_table` (`fname`, `lname`, `age`, `job_title`, `salary`) VALUES (?, ?, ?, ?, ?)'
+  try {
+    const [result, field] = await pool.query(q, [fname, lname, age, job_title, salary])
+      console.log(result)
+      return res.status(200)
+  } catch (error) {
+      console.log("error:", error)
+      return res.status(404)
+  }
+
 })
 
 
-
-//INSERT INTO `employees`.`employee_table` (`fname`, `lname`, `age`, `job_title`, `salary`) VALUES ('Denny', 'Crane', '99', 'Chief Legal Counsel', '64331');
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}`)
 })
+
+/*
+
+
+  /**
+   * This is returned when update was successful
+   * {
+   *   "fieldCount": 0,
+   *   "affectedRows": 1,
+   *   "insertId": 0,
+   *   "serverStatus": 2,
+   *   "warningCount": 0,
+   *   "message": "(Rows matched: 1  Changed: 1  Warnings: 0",
+   *   "protocol41": true,
+   *   "changedRows": 1
+   * }
+   */
+
+   /**
+    * This is returned when no matching rows are found
+    * {
+    *  "fieldCount": 0,
+    *  "affectedRows": 0,
+    *  "insertId": 0,
+    *  "serverStatus": 2,
+    *  "warningCount": 0,
+    *  "message": "(Rows matched: 0  Changed: 0  Warnings: 0",
+    *  "protocol41": true,
+    *  "changedRows": 0
+    * }
+*/
+
