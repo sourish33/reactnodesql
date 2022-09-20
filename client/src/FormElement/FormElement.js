@@ -6,11 +6,13 @@ function FormElement() {
         fname: "",
         lname: "",
         age: 0,
-        jobtitle: "",
+        job_title: "",
         salary: 0,
     })
 
-    const handleChange = (nam, value) => {
+    const handleChange = (e) => {
+        const nam = e.target.name
+        const value = e.target.value
         const updatedFormData = { ...formData }
         updatedFormData[nam] = value
         setFormData(updatedFormData)
@@ -18,8 +20,8 @@ function FormElement() {
 
     const handleClick = (e) => {
         e.preventDefault()
-        // const data = `${formData.fname} ${formData.lname}, aged ${formData.age} works as ${formData.jobtitle} and makes $${formData.salary}/year`
-        // alert(data)
+        const data = `${formData.fname} ${formData.lname}, aged ${formData.age} works as ${formData.job_title} and makes $${formData.salary}/year`
+        alert(data)
     }
 
     
@@ -34,7 +36,7 @@ function FormElement() {
                     name="fname"
                     value={formData.fname}
                     onChange={(e) =>
-                        handleChange(e.target.name, e.target.value)
+                        handleChange(e)
                     }
                 ></input>
                 <label>Last Name:</label>
@@ -43,7 +45,7 @@ function FormElement() {
                     name="lname"
                     value={formData.lname}
                     onChange={(e) =>
-                        handleChange(e.target.name, e.target.value)
+                        handleChange(e)
                     }
                 ></input>
                 <label>Age:</label>
@@ -52,16 +54,16 @@ function FormElement() {
                     name="age"
                     value={formData.age}
                     onChange={(e) =>
-                        handleChange(e.target.name, e.target.value)
+                        handleChange(e)
                     }
                 ></input>
                 <label>Job Title:</label>
                 <input
                     type="text"
-                    name="jobtitle"
-                    value={formData.jobtitle}
+                    name="job_title"
+                    value={formData.job_title}
                     onChange={(e) =>
-                        handleChange(e.target.name, e.target.value)
+                        handleChange(e)
                     }
                 ></input>
                 <label>Salary:</label>
@@ -70,10 +72,10 @@ function FormElement() {
                     name="salary"
                     value={formData.salary}
                     onChange={(e) =>
-                        handleChange(e.target.name, e.target.value)
+                        handleChange(e)
                     }
                 ></input>
-                <div className={styles.buttonholder}><button type="button" className="btn btn-primary mt-2" onClick={handleClick}>Submit</button></div>
+                <div><button type="button" className="btn btn-primary mt-2" onClick={handleClick}>Submit</button></div>
 
             </form>
         </div>
