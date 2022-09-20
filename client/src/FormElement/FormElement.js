@@ -20,8 +20,17 @@ function FormElement() {
 
     const handleClick = (e) => {
         e.preventDefault()
-        const data = `${formData.fname} ${formData.lname}, aged ${formData.age} works as ${formData.job_title} and makes $${formData.salary}/year`
-        alert(data)
+        const requestOptions = {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        };
+        fetch('http://localhost:3001/user', requestOptions)
+            .then(response => response.json())
+            .then(response => console.log(response));
+        // const data = `${formData.fname} ${formData.lname}, aged ${formData.age} works as ${formData.job_title} and makes $${formData.salary}/year`
+        // alert(data)
     }
 
     
@@ -32,7 +41,7 @@ function FormElement() {
             <form className="mt-4 ml-0">
                     <h2>Enter Employee Data</h2>
                         <div className="col-lg-6">
-                            <label for='fname' className="form-label">First Name:</label>
+                            <label htmlFor='fname' className="form-label">First Name:</label>
                             <input
                                 type="text"
                                 name="fname"
@@ -43,7 +52,7 @@ function FormElement() {
                                 }>
                             </input>
             
-                            <label for='lname' className="form-label">Last Name:</label>
+                            <label htmlFor='lname' className="form-label">Last Name:</label>
                             <input
                                 type="text"
                                 name="lname"
@@ -53,7 +62,7 @@ function FormElement() {
                                     handleChange(e)
                                 }
                             ></input>
-                            <label for='age' className="form-label">Age:</label>
+                            <label htmlFor='age' className="form-label">Age:</label>
                             <input
                                 type="number"
                                 name="age"
@@ -63,7 +72,7 @@ function FormElement() {
                                     handleChange(e)
                                 }
                             ></input>
-                            <label for='job_title' className="form-label">Job Title:</label>
+                            <label htmlFor='job_title' className="form-label">Job Title:</label>
                             <input
                                 type="text"
                                 name="job_title"
@@ -73,7 +82,7 @@ function FormElement() {
                                     handleChange(e)
                                 }
                             ></input>
-                            <label for='salary' className="form-label">Salary:</label>
+                            <label htmlFor='salary' className="form-label">Salary:</label>
                             <input
                                 type="number"
                                 name="salary"

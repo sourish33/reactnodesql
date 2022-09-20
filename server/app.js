@@ -4,6 +4,7 @@ const PORT = 3001
 
 const app = express()
 app.use(cors())
+app.use(express.json())//required to make sure the stringified data comes through
 
 // get the client
 const mysql = require("mysql2/promise")
@@ -36,8 +37,14 @@ app.get("/users", async (req, res) => {
   }
 })
 
-app.post("/users", async (req, res) =>{
-  const {fname, lname, age, job_title, salary} = req.query
+app.post("/user", async (req, res) =>{
+  // console.log(Object.keys(req))
+  // console.log(req.params)
+  // console.log("****************")
+  // console.log(req.query)
+  // console.log("****************")
+  // console.log(req.body)
+  const {fname, lname, age, job_title, salary} = req.body
   const data = `${fname} ${lname}, aged ${age} works as ${job_title} and makes $${salary}/year`
   console.log(data)
   res.send({status: "ok"})
