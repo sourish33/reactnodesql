@@ -31,9 +31,6 @@ const data = [
 
 const DataTable = () => {
     const {navigateToAdd} = React.useContext(UserContext)
-    const handleClick = () => {
-        window.alert("Hello")
-    }
 
     const tableData = data.map((el) => {
         return (
@@ -75,7 +72,10 @@ const DataTable = () => {
                         <th scope="col" className="d-flex justify-content-around">Actions</th>
                     </tr>
                 </thead>
-                {tableData}
+                <tbody>
+                    {tableData}
+                </tbody>
+                
             </table>
             <div className="d-flex justify-content-center">
                 <button type="button" className="btn btn-primary mx-2" onClick={navigateToAdd}>Add Employee</button>
