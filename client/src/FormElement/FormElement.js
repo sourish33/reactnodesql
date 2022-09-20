@@ -3,6 +3,8 @@ import Alert from 'react-bootstrap/Alert';
 // import styles from "./FormElement.module.css"
 
 function FormElement() {
+    const [show, setShow] = useState(true);
+    const [alert, setAlert] = useState({type: "danger", text: "Something went wrong"})
     const [formData, setFormData] = useState({
         fname: "",
         lname: "",
@@ -30,8 +32,6 @@ function FormElement() {
         fetch('http://localhost:3001/user', requestOptions)
             .then(response => response.json())
             .then(response => console.log(response));
-        // const data = `${formData.fname} ${formData.lname}, aged ${formData.age} works as ${formData.job_title} and makes $${formData.salary}/year`
-        // alert(data)
     }
 
     
@@ -97,8 +97,8 @@ function FormElement() {
             
                     <div><button type="button" className="btn btn-primary mt-2" onClick={handleClick}>Submit</button></div>
                 </form>
-                <Alert variant={'success'} className="mt-4 col-lg-6">
-                        This is a alert—check it out!
+                <Alert variant={alert.type} className="mt-2 col-lg-6" show={show} onClose={() => setShow(false)} dismissible>
+                        {alert.text}
                 </Alert>
         </div>
     )
