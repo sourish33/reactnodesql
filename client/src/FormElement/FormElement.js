@@ -18,8 +18,8 @@ function FormElement() {
 
     const handleClick = (e) => {
         e.preventDefault()
-        const data = `${formData.fname} ${formData.lname}, aged ${formData.age} works as ${formData.jobtitle} and makes $${formData.salary}/year`
-        alert(data)
+        // const data = `${formData.fname} ${formData.lname}, aged ${formData.age} works as ${formData.jobtitle} and makes $${formData.salary}/year`
+        // alert(data)
     }
 
     

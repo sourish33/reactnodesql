@@ -34,8 +34,18 @@ app.get("/users", async (req, res) => {
   } catch (error) {
       return res.status(404).json(error)
   }
-  
 })
+
+app.post("/users", async (req, res) =>{
+  const {fname, lname, age, job_title, salary} = req.query
+  const data = `${fname} ${lname}, aged ${age} works as ${job_title} and makes $${salary}/year`
+  console.log(data)
+  res.send({status: "ok"})
+})
+
+
+
+//INSERT INTO `employees`.`employee_table` (`fname`, `lname`, `age`, `job_title`, `salary`) VALUES ('Denny', 'Crane', '99', 'Chief Legal Counsel', '64331');
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}`)
