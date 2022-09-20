@@ -3,8 +3,7 @@ import Alert from 'react-bootstrap/Alert';
 // import styles from "./FormElement.module.css"
 
 function FormElement() {
-    const [show, setShow] = useState(true);
-    const [alert, setAlert] = useState({type: "danger", text: "Something went wrong"})
+    const [alert, setAlert] = useState({visible: false, type: "primary", text: "Database updated"})
     const [formData, setFormData] = useState({
         fname: "",
         lname: "",
@@ -28,10 +27,18 @@ function FormElement() {
             mode: 'cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
-        };
+        }
         fetch('http://localhost:3001/user', requestOptions)
-            .then(response => response.json())
-            .then(response => console.log(response));
+        .then((response) => response.json())
+        .then((data)=>{
+            if(data && data.affectedRows>=1){
+                console.log(data)
+                setAlert(x=> {return {...x, visible: true, type: "primary", text: `Database updated with ${data.affectedRows} record`}})
+            } else{
+                setAlert(x=> {return {...x, visible: true, type: "danger", text: "Something went wrong"}})
+            }
+        })
+        
     }
 
     
@@ -97,7 +104,7 @@ function FormElement() {
             
                     <div><button type="button" className="btn btn-primary mt-2" onClick={handleClick}>Submit</button></div>
                 </form>
-                <Alert variant={alert.type} className="mt-2 col-lg-6" show={show} onClose={() => setShow(false)} dismissible>
+                <Alert variant={alert.type} className="mt-2 col-lg-6" show={alert.visible} onClose={() => setAlert(x=>{return {...x, visible: false} })} dismissible>
                         {alert.text}
                 </Alert>
         </div>

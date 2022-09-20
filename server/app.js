@@ -39,17 +39,13 @@ app.get("/users", async (req, res) => {
 
 app.post("/user", async (req, res) =>{
   const {fname, lname, age, job_title, salary} = req.body
-  // const data = `${fname} ${lname}, aged ${age} works as ${job_title} and makes $${salary}/year`
-  // console.log(data)
-  //INSERT INTO `employees`.`employee_table` (`fname`, `lname`, `age`, `job_title`, `salary`) VALUES ('Danny', 'Bonaduce', '89', 'Actor', '23466')
   const q = 'INSERT INTO `employees`.`employee_table` (`fname`, `lname`, `age`, `job_title`, `salary`) VALUES (?, ?, ?, ?, ?)'
   try {
     const [result, field] = await pool.query(q, [fname, lname, age, job_title, salary])
-      console.log(result)
-      return res.status(200)
+      return res.status(200).json(result)
   } catch (error) {
       console.log("error:", error)
-      return res.status(404)
+      return res.status(404).json(error)
   }
 
 })

@@ -38,7 +38,6 @@ const DataTable = () => {
         const fetchData = async () =>{
             const data = await fetch('http://localhost:3001/users')
             const datajson = await data.json()
-            console.log(datajson)
             setData(x=>[...x, ...datajson])
         }
         fetchData().catch(console.error)
