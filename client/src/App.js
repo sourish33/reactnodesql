@@ -11,11 +11,13 @@ function App() {
 
   const navigate = useNavigate()
 
-  const navigateToAdd = () =>{
+  const navigateToAdd = (e) =>{
+    e.preventDefault()
     navigate("/add")
   }
 
-  const navigateToHome = () =>{
+  const navigateToHome = (e) =>{
+    e.preventDefault();
     navigate("/")
   }
 
