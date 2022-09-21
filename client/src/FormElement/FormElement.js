@@ -20,7 +20,7 @@ function FormElement() {
         setFormData(updatedFormData)
     }
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault()
         const requestOptions = {
             method: 'POST',
@@ -28,16 +28,23 @@ function FormElement() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         }
-        fetch('http://localhost:3001/user', requestOptions)
-        .then((response) => response.json())
-        .then((data)=>{
+        try {
+            const response = await fetch('http://localhost:3001/user', requestOptions)
+            const isJson = response.headers.get('content-type')?.includes('application/json');
+            const data = isJson ? await response.json() : null;
+            if (!response.ok) {
+                throw new Error("Bad response")
+            }
             if(data && data.affectedRows>=1){
-                console.log(data)
                 setAlert(x=> {return {...x, visible: true, type: "primary", text: `Database updated with ${data.affectedRows} record`}})
             } else{
-                setAlert(x=> {return {...x, visible: true, type: "danger", text: "Something went wrong"}})
+                throw new Error("No data recieved or updates unsuccessful")
             }
-        })
+            
+        } catch (error) {
+            setAlert(x=> {return {...x, visible: true, type: "danger", text: error}})
+        }
+
         
     }
 

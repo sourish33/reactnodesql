@@ -50,6 +50,9 @@ app.post("/user", async (req, res) =>{
 
 })
 
+app.use(function(req, res) {
+  res.status(404).send("Not Found");
+});
 
 
 app.listen(PORT, () => {

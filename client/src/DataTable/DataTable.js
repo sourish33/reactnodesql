@@ -51,7 +51,7 @@ const DataTable = () => {
                 <td>{el.lname}</td>
                 <td>{el.age}</td>
                 <td>{el["job_title"]}</td>
-                <td>{el.salary}</td>
+                <td>{Number(el.salary).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                 <td className="d-flex justify-content-center">
                     <div className="btn-toolbar">
                         <button type="button" className="btn btn-primary mx-1 my-1">
