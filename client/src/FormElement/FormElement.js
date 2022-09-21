@@ -37,6 +37,13 @@ function FormElement() {
             }
             if(data && data.affectedRows>=1){
                 setAlert(x=> {return {...x, visible: true, type: "primary", text: `Database updated with ${data.affectedRows} record`}})
+                setFormData({
+                    fname: "",
+                    lname: "",
+                    age: "",
+                    job_title: "",
+                    salary: "",
+                })
             } else{
                 throw new Error("No data recieved or updates unsuccessful")
             }
