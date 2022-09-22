@@ -50,9 +50,23 @@ app.post("/user", async (req, res) =>{
 
 })
 
+app.delete("/user", async (req, res) =>{
+  const {id} = req.query
+  console.log(id)
+  const q = "DELETE FROM `employees`.`employee_table` WHERE (`id` = ?)"
+  try {
+    const [result, field] = await pool.query(q, [id])
+    return res.status(204).json(result)
+  } catch (error) {
+    console.log("error:", error)
+    return res.status(404).json(error)
+}
+})
+
 app.use(function(req, res) {
   res.status(404).send("Not Found");
 });
+
 
 
 app.listen(PORT, () => {

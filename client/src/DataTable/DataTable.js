@@ -1,34 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { UserContext } from "../App"
 
-// const data = [
-//     {
-//         id: 1,
-//         fname: "Sacha",
-//         lname: "LittleFeather",
-//         age: 31,
-//         job_title: "Copy writer",
-//         salary: 37221,
-//     },
-
-//     {
-//         id: 2,
-//         fname: "Sonam",
-//         lname: "Malvia",
-//         age: 32,
-//         job_title: "Copy reader",
-//         salary: 40051,
-//     },
-//     {
-//         id: 3,
-//         fname: "Gulab",
-//         lname: "Golgappa",
-//         age: 38,
-//         job_title: "Copy writer",
-//         salary: 37552,
-//     },
-// ]
-
 const DataTable = () => {
     const {navigateToAdd} = React.useContext(UserContext)
 
