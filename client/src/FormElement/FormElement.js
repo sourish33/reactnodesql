@@ -28,31 +28,33 @@ function FormElement() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         }
-        try {
-            const response = await fetch('http://localhost:3001/user', requestOptions)
-            const isJson = response.headers.get('content-type')?.includes('application/json');
-            const data = isJson ? await response.json() : null;
-            if (!response.ok) {
-                throw new Error("Bad response")
-            }
-            if(data && data.affectedRows>=1){
-                setAlert(x=> {return {...x, visible: true, type: "primary", text: `Database updated with ${data.affectedRows} record`}})
-                setFormData({
-                    fname: "",
-                    lname: "",
-                    age: "",
-                    job_title: "",
-                    salary: "",
-                })
-            } else{
-                throw new Error("No data recieved or updates unsuccessful")
-            }
-            
-        } catch (error) {
-            setAlert(x=> {return {...x, visible: true, type: "danger", text: error}})
-        }
 
-        
+        const postData = async () =>{
+                const response = await fetch('http://localhost:3001/user', requestOptions)
+                if (!response || !response.ok) {
+                    throw new Error("Bad response")
+                }
+                const isJson = response.headers.get('content-type')?.includes('application/json');
+                const data = isJson ? await response.json() : null;
+
+                if(data && data.affectedRows>=1){
+                    setAlert(x=> {return {...x, visible: true, type: "primary", text: `Database updated with ${data.affectedRows} record`}})
+                    setFormData({
+                        fname: "",
+                        lname: "",
+                        age: "",
+                        job_title: "",
+                        salary: "",
+                    })
+                } else{
+                    throw new Error("No data recieved or updates unsuccessful")
+                }
+            }
+        postData().catch(err=>{
+            console.log(err)
+            setAlert(x=> {return {...x, visible: true, type: "danger", text: `${err}`}})
+        })
+            
     }
 
     
@@ -126,3 +128,10 @@ function FormElement() {
 }
 
 export default FormElement
+
+
+        
+        
+        
+        
+
