@@ -52,15 +52,11 @@ app.post("/user", async (req, res) =>{
 
 app.delete("/user/:id", async (req, res) =>{
   const {id} = req.params
-  console.log(id)
   const q = "DELETE FROM `employees`.`employee_table` WHERE (`id` = ?)"
   try {
     const [result, field] = await pool.query(q, [id])
-    console.log("delete successful!")
-    console.log(result)
     return res.status(204).json(result)
   } catch (error) {
-    console.log("error:", error)
     return res.status(404).json(error)
 }
 })

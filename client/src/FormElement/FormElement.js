@@ -46,12 +46,14 @@ function FormElement() {
                         job_title: "",
                         salary: "",
                     })
+                    setTimeout(()=>{
+                        setAlert(x=> {return {...x, visible: false}})
+                    }, 1000)
                 } else{
                     throw new Error("No data recieved or updates unsuccessful")
                 }
             }
         postData().catch(err=>{
-            console.log(err)
             setAlert(x=> {return {...x, visible: true, type: "danger", text: `${err}`}})
         })
             

@@ -9,15 +9,15 @@ const DataTable = () => {
     const [alert, setAlert] = useState({visible: false, type: "primary", text: "Database updated"})
 
     const handleDelete = (id) => {
-        ///////TODO
-        window.alert(`Are you sure you want to delete record id=${id}?`)
         fetch(`http://localhost:3001/user/${id}`, { method: "DELETE" })
             .then(async (response) => {
                 if (!response || !response.ok) {
                     throw new Error("Bad response")
                 }
-                console.log(response)
                 setAlert(x=> {return {...x, visible: true, type: "primary", text: `Delete Successful!`}})
+                setTimeout(()=>{
+                    setAlert(x=> {return {...x, visible: false}})
+                }, 1000)
             })
             .catch((err) => {
                 setAlert(x=> {return {...x, visible: true, type: "danger", text: `${err}`}})
