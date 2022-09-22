@@ -1,21 +1,35 @@
 import React, { useEffect, useState } from "react"
 import { UserContext } from "../App"
+import Alert from 'react-bootstrap/Alert';
 
 const DataTable = () => {
-    const {navigateToAdd} = React.useContext(UserContext)
+    const { navigateToAdd } = React.useContext(UserContext)
 
     const [data, setData] = useState([])
+    const [alert, setAlert] = useState({visible: false, type: "primary", text: "Database updated"})
 
-    const handleDelete = (id) =>{
+    const handleDelete = (id) => {
         ///////TODO
-        alert(`Are you sure you want to delete record id=${id}?`)
+        window.alert(`Are you sure you want to delete record id=${id}?`)
+        fetch(`http://localhost:3001/user/${id}`, { method: "DELETE" })
+            .then(async (response) => {
+                if (!response || !response.ok) {
+                    throw new Error("Bad response")
+                }
+                console.log(response)
+                setAlert(x=> {return {...x, visible: true, type: "primary", text: `Delete Successful!`}})
+            })
+            .catch((err) => {
+                setAlert(x=> {return {...x, visible: true, type: "danger", text: `${err}`}})
+                console.error("There was an error!", err)
+            })
     }
 
-    useEffect(()=>{
-        const fetchData = async () =>{
-            const data = await fetch('http://localhost:3001/users')
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await fetch("http://localhost:3001/users")
             const datajson = await data.json()
-            setData(x=>[...x, ...datajson])
+            setData((x) => [...x, ...datajson])
         }
         fetchData().catch(console.error)
     }, [])
@@ -28,16 +42,31 @@ const DataTable = () => {
                 <td>{el.lname}</td>
                 <td>{el.age}</td>
                 <td>{el["job_title"]}</td>
-                <td>{Number(el.salary).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                <td>
+                    {Number(el.salary).toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                    })}
+                </td>
                 <td className="d-flex justify-content-center">
                     <div className="btn-toolbar">
-                        <button type="button" className="btn btn-primary mx-1 my-1">
+                        <button
+                            type="button"
+                            className="btn btn-primary mx-1 my-1"
+                        >
                             View
                         </button>
-                        <button type="button" className="btn btn-secondary mx-1 my-1">
+                        <button
+                            type="button"
+                            className="btn btn-secondary mx-1 my-1"
+                        >
                             Edit
                         </button>
-                        <button type="button" className="btn btn-danger mx-1 my-1" onClick={()=>handleDelete(el.id)}>
+                        <button
+                            type="button"
+                            className="btn btn-danger mx-1 my-1"
+                            onClick={() => handleDelete(el.id)}
+                        >
                             Delete
                         </button>
                     </div>
@@ -47,7 +76,7 @@ const DataTable = () => {
     })
 
     return (
-        <> 
+        <>
             <table className="table table-bordered border border-2 table-striped mt-4 ml-0">
                 <thead>
                     <tr>
@@ -57,17 +86,28 @@ const DataTable = () => {
                         <th scope="col">Age</th>
                         <th scope="col">Job Title</th>
                         <th scope="col">Salary</th>
-                        <th scope="col" className="d-flex justify-content-around">Actions</th>
+                        <th
+                            scope="col"
+                            className="d-flex justify-content-around"
+                        >
+                            Actions
+                        </th>
                     </tr>
                 </thead>
-                <tbody>
-                    {tableData}
-                </tbody>
-                
+                <tbody>{tableData}</tbody>
             </table>
             <div className="d-flex justify-content-center">
-                <button type="button" className="btn btn-primary mx-2" onClick={navigateToAdd}>Add Employee</button>
+                <button
+                    type="button"
+                    className="btn btn-primary mx-2"
+                    onClick={navigateToAdd}
+                >
+                    Add Employee
+                </button>
             </div>
+            <Alert variant={alert.type} className="mt-2" show={alert.visible} onClose={() => setAlert(x=>{return {...x, visible: false} })} dismissible>
+                    {alert.text}
+            </Alert>
         </>
     )
 }
