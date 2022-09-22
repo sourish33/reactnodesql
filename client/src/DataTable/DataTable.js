@@ -29,10 +29,10 @@ const DataTable = () => {
         const fetchData = async () => {
             const data = await fetch("http://localhost:3001/users")
             const datajson = await data.json()
-            setData((x) => [...x, ...datajson])
+            setData((x) => [...datajson])
         }
         fetchData().catch(console.error)
-    }, [])
+    }, [alert])
 
     const tableData = data.map((el) => {
         return (
