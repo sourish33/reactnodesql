@@ -50,6 +50,20 @@ app.post("/user", async (req, res) =>{
 
 })
 
+app.put('/user/:id', async (req, res) =>{
+  const { id} = req.params
+  const {fname, lname, age, job_title, salary} = req.body
+  console.log(id, fname,salary,job_title)
+  const q = 'UPDATE `employees`.`employee_table` SET `fname` = ?, `lname` = ?, `age` = ?, `job_title` = ?, `salary` = ? WHERE (`id` = ?);'
+  try {
+    const [result, field] = await pool.query(q, [fname, lname, age, job_title, salary, id])
+      return res.status(200).json(result)
+  } catch (error) {
+      console.log("error:", error)
+      return res.status(404).json(error)
+  }
+})
+
 app.delete("/user/:id", async (req, res) =>{
   const {id} = req.params
   const q = "DELETE FROM `employees`.`employee_table` WHERE (`id` = ?)"
