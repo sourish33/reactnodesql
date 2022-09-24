@@ -37,6 +37,18 @@ app.get("/users", async (req, res) => {
   }
 })
 
+app.get("/user/:id", async (req, res) => {
+  const { id} = req.params
+  const q = "SELECT * FROM employee_table where `id`=?"
+  try {
+    const [result, field] = await pool.query(q, [id])
+      return res.status(200).json(result)
+  } catch (error) {
+      return res.status(404).json(error)
+  }
+
+})
+
 app.post("/user", async (req, res) =>{
   const {fname, lname, age, job_title, salary} = req.body
   const q = 'INSERT INTO `employees`.`employee_table` (`fname`, `lname`, `age`, `job_title`, `salary`) VALUES (?, ?, ?, ?, ?)'
