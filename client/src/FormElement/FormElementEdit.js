@@ -1,9 +1,9 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Alert from 'react-bootstrap/Alert';
 import InputForm from "../InputForm/InputForm";
 // import styles from "./FormElement.module.css"
 
-const FormElementEdit = () => {
+const FormElementEdit = ({id}) => {
 
     //TODO useEffect to set initial form data
 
@@ -15,6 +15,17 @@ const FormElementEdit = () => {
         job_title: "",
         salary: 0,
     })
+
+    useEffect(()=>{
+        const fetchData = async () => {
+            const data = await fetch(`http://localhost:3001/user/${id}`)
+            const datajson = await data.json()
+            // setFormData((x) => [...datajson])
+            setFormData(datajson[0])
+        }
+        fetchData().catch(console.error)
+
+    },[])
 
     const handleChange = (e) => {
         const nam = e.target.name

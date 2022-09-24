@@ -3,6 +3,7 @@ import DataTable from './DataTable/DataTable';
 import FormElement from './FormElement/FormElement';
 import {Route, Routes, useNavigate} from 'react-router-dom'
 import NavigationBar from './Navbar/NavigationBar';
+import FormElementEdit from './FormElement/FormElementEdit';
 
 export const UserContext = React.createContext();
 
@@ -28,6 +29,7 @@ function App() {
       <Routes>
         <Route path="/" element = {<DataTable/>}/>
         <Route path="/add" element = {<FormElement/>}/>
+        <Route path="/edit" element ={<FormElementEdit id={57}/>}/>
       </Routes>
     </div>
     </UserContext.Provider>
