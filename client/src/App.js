@@ -5,6 +5,7 @@ import {Route, Routes, useNavigate} from 'react-router-dom'
 import NavigationBar from './Navbar/NavigationBar';
 import FormElementEdit from './FormElement/FormElementEdit';
 import CardItem from './CardItem/CardItem';
+import ProfilePage from './ProfilePage/ProfilePage';
 
 export const UserContext = React.createContext();
 
@@ -39,7 +40,7 @@ function App() {
         <Route path="/" element = {<DataTable/>}/>
         <Route path="/add" element = {<FormElement/>}/>
         <Route path="/edit/:id" element ={<FormElementEdit/>}/>
-        <Route path="/view/:id" element ={<CardItem/>}/>
+        <Route path="/view/:id" element ={<ProfilePage/>}/>
       </Routes>
     </div>
     </UserContext.Provider>
