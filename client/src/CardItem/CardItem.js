@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useParams } from 'react-router-dom';
+import { UserContext } from '../App';
 
 const CardItem = () => {
 
   const {id} = useParams()
   const [formData, setFormData] = useState({})
+  const { navigateToAdd,  navigateToEdit, navigateToView} = React.useContext(UserContext)
 
   useEffect(()=>{
       const fetchData = async () => {
@@ -18,7 +20,7 @@ const CardItem = () => {
 
   },[])
 
-  const {image, fname, lname, age, job_title, salary} = formData
+  const {image, fname, lname, age, job_title, salary, bio} = formData
 
   const salaryFormatted = Number(salary).toLocaleString("en-US", {
     style: "currency",
@@ -26,13 +28,12 @@ const CardItem = () => {
 })
   return (
     <div className='d-flex justify-content-center mt-4'>
-        <Card style={{ width: '25rem' }}>
+        <Card style={{ width: '20rem' }}>
           <Card.Img variant="top" src={image} />
           <Card.Body>
             <Card.Title>{`${fname} ${lname}`}</Card.Title>
             <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
+                    {bio}
             </Card.Text>
           </Card.Body>
           <ListGroup className="list-group-flush">

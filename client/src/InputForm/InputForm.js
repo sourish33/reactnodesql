@@ -38,6 +38,18 @@ const InputForm = ({formData, handleChange, handleSubmit, alert, setAlert}) => {
                                     handleChange(e)
                                 }
                             ></input>
+                            <label htmlFor='bio' className="form-label">Bio:</label>
+                            <textarea 
+                                className="form-control" 
+                                name="bio" 
+                                rows="3"   
+                                maxLength={500}                           
+                                value={formData.bio || ""}
+                                onChange={(e) =>
+                                    handleChange(e)
+                                    } 
+                                >
+                                </textarea>
                             <label htmlFor='job_title' className="form-label">Job Title:</label>
                             <input
                                 type="text"

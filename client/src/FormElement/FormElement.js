@@ -10,7 +10,8 @@ function FormElement() {
         age: 0,
         job_title: "",
         salary: 0,
-        image: ""
+        image: "",
+        bio: ""
     })
 
     const handleChange = (e) => {
@@ -46,7 +47,8 @@ function FormElement() {
                         age: "",
                         job_title: "",
                         salary: "",
-                        image:""
+                        image:"",
+                        bio:""
                     })
                     setTimeout(()=>{
                         setAlert(x=> {return {...x, visible: false}})

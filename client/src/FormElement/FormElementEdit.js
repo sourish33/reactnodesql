@@ -14,6 +14,7 @@ const FormElementEdit = () => {
         age: 0,
         job_title: "",
         salary: 0,
+        bio:""
     })
 
     useEffect(()=>{
