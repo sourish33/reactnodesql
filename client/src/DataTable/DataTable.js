@@ -87,10 +87,10 @@ const DataTable = () => {
                         <th scope="col">#</th>
                         <th scope="col">Image</th>
                         <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Job Title</th>
-                        <th scope="col">Salary</th>
+                        <th scope="col">Last Name <i class="fa-solid fa-sort" style={{cursor:"pointer"}}></i></th>
+                        <th scope="col">Age <i class="fa-solid fa-sort"></i></th>
+                        <th scope="col">Job Title <i class="fa-solid fa-sort"></i></th>
+                        <th scope="col">Salary <i class="fa-solid fa-sort"></i></th>
                         <th
                             scope="col"
                             className="d-flex justify-content-around"
@@ -101,15 +101,6 @@ const DataTable = () => {
                 </thead>
                 <tbody>{tableData}</tbody>
             </table>
-            <div className="d-flex justify-content-center">
-                <button
-                    type="button"
-                    className="btn btn-primary mx-2"
-                    onClick={navigateToAdd}
-                >
-                    Add Employee
-                </button>
-            </div>
             <Alert variant={alert.type} className="mt-2" show={alert.visible} onClose={() => setAlert(x=>{return {...x, visible: false} })} dismissible>
                     {alert.text}
             </Alert>

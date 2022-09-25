@@ -22,7 +22,6 @@ const FormElementEdit = () => {
             const data = await fetch(`http://localhost:3001/user/${id}`)
             const [datajson,] = await data.json()
             console.log(datajson)
-            // setFormData((x) => [...datajson])
             setFormData(datajson)
         }
         fetchData().catch(console.error)

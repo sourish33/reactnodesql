@@ -4,7 +4,6 @@ import FormElement from './FormElement/FormElement';
 import {Route, Routes, useNavigate} from 'react-router-dom'
 import NavigationBar from './Navbar/NavigationBar';
 import FormElementEdit from './FormElement/FormElementEdit';
-import CardItem from './CardItem/CardItem';
 import ProfilePage from './ProfilePage/ProfilePage';
 
 export const UserContext = React.createContext();
