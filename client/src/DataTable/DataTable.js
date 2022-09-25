@@ -79,6 +79,28 @@ const DataTable = () => {
         )
     })
 
+    const sortByLastName = () => {
+        window.alert("Sorting by last name!")
+    }
+    const sortByAge = () => {
+        window.alert("Sorting by Age!")
+    }
+    const sortByJobTitle = () => {
+        window.alert("Sorting by Job!")
+    }
+    const sortBySalary = () =>{
+        window.alert("Sorting by Salary!")
+    }
+
+    const Sorter = ({handleSort}) =>{
+        return (
+            <span style={{cursor:"pointer"}} onClick={()=>{handleSort()}}>
+                <i className="fa-solid fa-sort"></i>
+            </span>
+        )
+
+    }
+
     return (
         <>
             <table className="table table-bordered border border-2  mt-4 ml-0">
@@ -87,10 +109,10 @@ const DataTable = () => {
                         <th scope="col">#</th>
                         <th scope="col">Image</th>
                         <th scope="col">First Name</th>
-                        <th scope="col">Last Name <i class="fa-solid fa-sort" style={{cursor:"pointer"}}></i></th>
-                        <th scope="col">Age <i class="fa-solid fa-sort"></i></th>
-                        <th scope="col">Job Title <i class="fa-solid fa-sort"></i></th>
-                        <th scope="col">Salary <i class="fa-solid fa-sort"></i></th>
+                        <th scope="col">Last Name <Sorter handleSort = {sortByLastName} /> </th>
+                        <th scope="col">Age <Sorter handleSort = {sortByAge} /></th>
+                        <th scope="col">Job Title <Sorter handleSort = {sortByJobTitle} /></th>
+                        <th scope="col">Salary <Sorter handleSort = {sortBySalary} /></th>
                         <th
                             scope="col"
                             className="d-flex justify-content-around"
