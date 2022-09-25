@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
-import Alert from 'react-bootstrap/Alert';
+import { useParams } from "react-router-dom";
 import InputForm from "../InputForm/InputForm";
 // import styles from "./FormElement.module.css"
 
-const FormElementEdit = ({id}) => {
+const FormElementEdit = () => {
 
-    //TODO useEffect to set initial form data
+    const {id} = useParams()
+    console.log(id)
 
     const [alert, setAlert] = useState({visible: false, type: "primary", text: "Database updated"})
     const [formData, setFormData] = useState({
@@ -19,9 +20,10 @@ const FormElementEdit = ({id}) => {
     useEffect(()=>{
         const fetchData = async () => {
             const data = await fetch(`http://localhost:3001/user/${id}`)
-            const datajson = await data.json()
+            const [datajson,] = await data.json()
+            console.log(datajson)
             // setFormData((x) => [...datajson])
-            setFormData(datajson[0])
+            setFormData(datajson)
         }
         fetchData().catch(console.error)
 
@@ -35,17 +37,17 @@ const FormElementEdit = ({id}) => {
         setFormData(updatedFormData)
     }
 
-    const handleClick = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const requestOptions = {
-            method: 'POST',
+            method: 'PUT',
             mode: 'cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         }
 
-        const postData = async () =>{
-                const response = await fetch('http://localhost:3001/user', requestOptions)
+        const putData = async () =>{
+                const response = await fetch(`http://localhost:3001/user/${id}`, requestOptions)
                 if (!response || !response.ok) {
                     throw new Error("Bad response")
                 }
@@ -53,14 +55,7 @@ const FormElementEdit = ({id}) => {
                 const data = isJson ? await response.json() : null;
 
                 if(data && data.affectedRows>=1){
-                    setAlert(x=> {return {...x, visible: true, type: "primary", text: `Database updated with ${data.affectedRows} record`}})
-                    setFormData({
-                        fname: "",
-                        lname: "",
-                        age: "",
-                        job_title: "",
-                        salary: "",
-                    })
+                    setAlert(x=> {return {...x, visible: true, type: "primary", text: `Your changes have been recorded.`}})
                     setTimeout(()=>{
                         setAlert(x=> {return {...x, visible: false}})
                     }, 1000)
@@ -68,7 +63,7 @@ const FormElementEdit = ({id}) => {
                     throw new Error("No data recieved or updates unsuccessful")
                 }
             }
-        postData().catch(err=>{
+        putData().catch(err=>{
             setAlert(x=> {return {...x, visible: true, type: "danger", text: `${err}`}})
         })
             
@@ -80,7 +75,7 @@ const FormElementEdit = ({id}) => {
         <InputForm 
         formData={formData}
         handleChange={handleChange}
-        handleClick = {handleClick}
+        handleSubmit = {handleSubmit}
         alert ={alert}
         setAlert ={setAlert}
         />

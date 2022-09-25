@@ -1,7 +1,7 @@
 import React from 'react'
 import Alert from 'react-bootstrap/Alert';
 
-const InputForm = ({formData, handleChange, handleClick, alert, setAlert}) => {
+const InputForm = ({formData, handleChange, handleSubmit, alert, setAlert}) => {
   return (
     <div className="row">
             <form className="mt-4 ml-0">
@@ -58,9 +58,19 @@ const InputForm = ({formData, handleChange, handleClick, alert, setAlert}) => {
                                     handleChange(e)
                                 }
                             ></input>
+                            <label htmlFor='image' className="form-label">Image Link</label>
+                            <input
+                                type="text"
+                                name="image"
+                                className="form-control"
+                                value={formData.image}
+                                onChange={(e) =>
+                                    handleChange(e)
+                                }
+                            ></input>
                         </div>
             
-                    <div><button type="button" className="btn btn-primary mt-2" onClick={handleClick}>Submit</button></div>
+                    <div><button type="button" className="btn btn-primary mt-2" onClick={handleSubmit}>Submit</button></div>
                 </form>
                 <Alert variant={alert.type} className="mt-2 col-lg-6" show={alert.visible} onClose={() => setAlert(x=>{return {...x, visible: false} })} dismissible>
                         {alert.text}

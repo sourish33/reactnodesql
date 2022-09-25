@@ -22,14 +22,18 @@ function App() {
     navigate("/")
   }
 
+  const navigateToEdit = (id) =>{
+    navigate(`/edit/${id}`)
+  }
+
   return (
-    <UserContext.Provider value={{navigateToAdd, navigateToHome}}>
+    <UserContext.Provider value={{navigateToAdd, navigateToHome, navigateToEdit}}>
       <NavigationBar/>
     <div className='container'>
       <Routes>
         <Route path="/" element = {<DataTable/>}/>
         <Route path="/add" element = {<FormElement/>}/>
-        <Route path="/edit" element ={<FormElementEdit id={57}/>}/>
+        <Route path="/edit/:id" element ={<FormElementEdit/>}/>
       </Routes>
     </div>
     </UserContext.Provider>

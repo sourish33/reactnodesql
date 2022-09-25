@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import Alert from 'react-bootstrap/Alert';
 import InputForm from "../InputForm/InputForm";
 // import styles from "./FormElement.module.css"
 
@@ -11,6 +10,7 @@ function FormElement() {
         age: 0,
         job_title: "",
         salary: 0,
+        image: ""
     })
 
     const handleChange = (e) => {
@@ -21,7 +21,7 @@ function FormElement() {
         setFormData(updatedFormData)
     }
 
-    const handleClick = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const requestOptions = {
             method: 'POST',
@@ -46,6 +46,7 @@ function FormElement() {
                         age: "",
                         job_title: "",
                         salary: "",
+                        image:""
                     })
                     setTimeout(()=>{
                         setAlert(x=> {return {...x, visible: false}})
@@ -66,7 +67,7 @@ function FormElement() {
         <InputForm 
         formData={formData}
         handleChange={handleChange}
-        handleClick = {handleClick}
+        handleSubmit = {handleSubmit}
         alert ={alert}
         setAlert ={setAlert}
         />

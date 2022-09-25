@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { UserContext } from "../App"
 import Alert from 'react-bootstrap/Alert';
+import styles from './DataTable.module.css'
 
 const DataTable = () => {
     const { navigateToAdd } = React.useContext(UserContext)
+    const { navigateToEdit } = React.useContext(UserContext)
 
     const [data, setData] = useState([])
     const [alert, setAlert] = useState({visible: false, type: "primary", text: "Database updated"})
@@ -14,7 +16,7 @@ const DataTable = () => {
                 if (!response || !response.ok) {
                     throw new Error("Bad response")
                 }
-                setAlert(x=> {return {...x, visible: true, type: "primary", text: `Delete Successful!`}})
+                setAlert(x=> {return {...x, visible: true, type: "danger", text: `Delete Successful!`}})
                 setTimeout(()=>{
                     setAlert(x=> {return {...x, visible: false}})
                 }, 1000)
@@ -38,6 +40,7 @@ const DataTable = () => {
         return (
             <tr key={el.id}>
                 <th scope="row">{el.id}</th>
+                <td className="d-flex justify-content-center"><div className={styles.imgbox}><img src={`${el.image}`} alt="Mugshot" /></div></td>
                 <td>{el.fname}</td>
                 <td>{el.lname}</td>
                 <td>{el.age}</td>
@@ -59,6 +62,7 @@ const DataTable = () => {
                         <button
                             type="button"
                             className="btn btn-secondary mx-1 my-1"
+                            onClick={() => navigateToEdit(el.id)}
                         >
                             Edit
                         </button>
@@ -77,10 +81,11 @@ const DataTable = () => {
 
     return (
         <>
-            <table className="table table-bordered border border-2 table-striped mt-4 ml-0">
+            <table className="table table-bordered border border-2  mt-4 ml-0">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Image</th>
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">Age</th>

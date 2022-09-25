@@ -50,10 +50,10 @@ app.get("/user/:id", async (req, res) => {
 })
 
 app.post("/user", async (req, res) =>{
-  const {fname, lname, age, job_title, salary} = req.body
-  const q = 'INSERT INTO `employees`.`employee_table` (`fname`, `lname`, `age`, `job_title`, `salary`) VALUES (?, ?, ?, ?, ?)'
+  const {fname, lname, age, job_title, salary, image} = req.body
+  const q = 'INSERT INTO `employees`.`employee_table` (`fname`, `lname`, `age`, `job_title`, `salary`, `image`) VALUES (?, ?, ?, ?, ?, ?)'
   try {
-    const [result, field] = await pool.query(q, [fname, lname, age, job_title, salary])
+    const [result, field] = await pool.query(q, [fname, lname, age, job_title, salary, image])
       return res.status(200).json(result)
   } catch (error) {
       console.log("error:", error)
@@ -64,11 +64,11 @@ app.post("/user", async (req, res) =>{
 
 app.put('/user/:id', async (req, res) =>{
   const { id} = req.params
-  const {fname, lname, age, job_title, salary} = req.body
+  const {fname, lname, age, job_title, salary, image} = req.body
   console.log(id, fname,salary,job_title)
-  const q = 'UPDATE `employees`.`employee_table` SET `fname` = ?, `lname` = ?, `age` = ?, `job_title` = ?, `salary` = ? WHERE (`id` = ?);'
+  const q = 'UPDATE `employees`.`employee_table` SET `fname` = ?, `lname` = ?, `age` = ?, `job_title` = ?, `salary` = ? , `image` = ? WHERE (`id` = ?);'
   try {
-    const [result, field] = await pool.query(q, [fname, lname, age, job_title, salary, id])
+    const [result, field] = await pool.query(q, [fname, lname, age, job_title, salary, image, id])
       return res.status(200).json(result)
   } catch (error) {
       console.log("error:", error)

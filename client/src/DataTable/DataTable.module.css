@@ -1,0 +1,13 @@
+.imgbox{
+    width: 100px;
+    height:160px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
