@@ -4,6 +4,7 @@ import FormElement from './FormElement/FormElement';
 import {Route, Routes, useNavigate} from 'react-router-dom'
 import NavigationBar from './Navbar/NavigationBar';
 import FormElementEdit from './FormElement/FormElementEdit';
+import CardItem from './CardItem/CardItem';
 
 export const UserContext = React.createContext();
 
@@ -26,14 +27,19 @@ function App() {
     navigate(`/edit/${id}`)
   }
 
+  const navigateToView = (id) =>{
+    navigate(`/view/${id}`)
+  }
+
   return (
-    <UserContext.Provider value={{navigateToAdd, navigateToHome, navigateToEdit}}>
+    <UserContext.Provider value={{navigateToAdd, navigateToHome, navigateToEdit, navigateToView}}>
       <NavigationBar/>
     <div className='container'>
       <Routes>
         <Route path="/" element = {<DataTable/>}/>
         <Route path="/add" element = {<FormElement/>}/>
         <Route path="/edit/:id" element ={<FormElementEdit/>}/>
+        <Route path="/view/:id" element ={<CardItem/>}/>
       </Routes>
     </div>
     </UserContext.Provider>

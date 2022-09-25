@@ -6,7 +6,6 @@ import InputForm from "../InputForm/InputForm";
 const FormElementEdit = () => {
 
     const {id} = useParams()
-    console.log(id)
 
     const [alert, setAlert] = useState({visible: false, type: "primary", text: "Database updated"})
     const [formData, setFormData] = useState({

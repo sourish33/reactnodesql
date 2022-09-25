@@ -4,8 +4,7 @@ import Alert from 'react-bootstrap/Alert';
 import styles from './DataTable.module.css'
 
 const DataTable = () => {
-    const { navigateToAdd } = React.useContext(UserContext)
-    const { navigateToEdit } = React.useContext(UserContext)
+    const { navigateToAdd,  navigateToEdit, navigateToView} = React.useContext(UserContext)
 
     const [data, setData] = useState([])
     const [alert, setAlert] = useState({visible: false, type: "primary", text: "Database updated"})
@@ -56,6 +55,7 @@ const DataTable = () => {
                         <button
                             type="button"
                             className="btn btn-primary mx-1 my-1"
+                            onClick={() => navigateToView(el.id)}
                         >
                             View
                         </button>
