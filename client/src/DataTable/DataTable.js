@@ -9,6 +9,10 @@ const DataTable = () => {
     const [data, setData] = useState([])
     const [alert, setAlert] = useState({visible: false, type: "primary", text: "Database updated"})
 
+
+
+
+
     const handleDelete = (id) => {
         fetch(`http://localhost:3001/user/${id}`, { method: "DELETE" })
             .then(async (response) => {
@@ -28,7 +32,8 @@ const DataTable = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await fetch("http://localhost:3001/users")
+            const apiAddress = `http://localhost:3001/users`
+            const data = await fetch(apiAddress)
             const datajson = await data.json()
             setData((x) => [...datajson])
         }
@@ -80,7 +85,7 @@ const DataTable = () => {
     })
 
     const sortByLastName = () => {
-        window.alert("Sorting by last name!")
+        window.alert(`Sorting by last name! ascending is`)
     }
     const sortByAge = () => {
         window.alert("Sorting by Age!")
