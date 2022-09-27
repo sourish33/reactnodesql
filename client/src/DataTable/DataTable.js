@@ -3,11 +3,28 @@ import { UserContext } from "../App"
 import Alert from 'react-bootstrap/Alert';
 import styles from './DataTable.module.css'
 
+
+const makeParamString = (obj) =>{
+    let str = '?sort='
+    let vals = Object.values(obj)
+    for (let val of vals){
+        if (val){
+            str+=val+','
+        }
+    }
+    return str.slice(0,-1)
+}
+
+
 const DataTable = () => {
     const { navigateToAdd,  navigateToEdit, navigateToView} = React.useContext(UserContext)
 
     const [data, setData] = useState([])
     const [alert, setAlert] = useState({visible: false, type: "primary", text: "Database updated"})
+    const [sortLastName, setSortLastName] = useState('lname:asc')
+    const [sortAge, setSortAge] = useState('age:asc')
+    const [salary, sortSalary] = useState('salary:asc')
+    const [jobTitle, sortJobTitle] = useState('job_title:asc')
 
 
 
@@ -33,7 +50,8 @@ const DataTable = () => {
     useEffect(() => {
         const fetchData = async () => {
             const apiAddress = `http://localhost:3001/users`
-            const data = await fetch(apiAddress)
+            const params = makeParamString({sortLastName, sortAge, salary, jobTitle})
+            const data = await fetch(apiAddress+params)
             const datajson = await data.json()
             setData((x) => [...datajson])
         }
@@ -136,3 +154,23 @@ const DataTable = () => {
 }
 
 export default DataTable
+
+
+
+// const sortOptions = {
+//     sortLastName: 'l_name:asc',
+//     sortAge: '',
+//     sortSalary: 'salary:asc',
+//     sortJobTitle: 'job_title:desc'
+// }
+
+// const makeParamString = (obj) =>{
+//     let str = '?sort='
+//     let vals = Object.values(obj)
+//     for (let val of vals){
+//         if (val){
+//             str+=val+','
+//         }
+//     }
+//     return str.slice(0,-1)
+// }

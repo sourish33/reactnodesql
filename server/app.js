@@ -1,4 +1,5 @@
 const express = require("express")
+const querystring = require("querystring");
 const cors = require('cors')
 const PORT = 3001
 
@@ -28,6 +29,12 @@ app.get("/", (req, res)=>{
 })
 
 app.get("/users", async (req, res) => {
+  const {sort} = req.query
+  const sortArr = sort.split(',')
+  const sortArrOfArr = sortArr.map(x=>x.split(':'))
+  const sortObj = Object.fromEntries(sortArrOfArr)
+  console.log(sortObj)
+
   const q = "SELECT * FROM employee_table"
   try {
     const [result, field] = await pool.query(q)
@@ -50,6 +57,7 @@ app.get("/user/:id", async (req, res) => {
 })
 
 app.post("/user", async (req, res) =>{
+  
   const {fname, lname, age, job_title, salary, image, bio} = req.body
   const q = 'INSERT INTO `employees`.`employee_table` (`fname`, `lname`, `age`, `job_title`, `salary`, `image`, `bio`) VALUES (?, ?, ?, ?, ?, ?, ?)'
   try {
