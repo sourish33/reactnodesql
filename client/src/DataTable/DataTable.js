@@ -60,10 +60,8 @@ const DataTable = () => {
         const fetchData = async () => {
             const apiAddress = `http://localhost:3001/users`
             const params = makeParamString(sortOptions)
-            console.log(apiAddress+params)
             const data = await fetch(apiAddress+params)
             const datajson = await data.json()
-            console.log(datajson)
             setData((x) => [...datajson])
         }
         fetchData().catch(console.error)
@@ -114,10 +112,24 @@ const DataTable = () => {
     })
 
     const sortByLastName = () => {
-        window.alert(`Sorting by last name! ascending is`)
+        let lname = ""
+        switch (sortOptions.lname){
+            case "":
+                lname = "lname:asc"
+                break
+            case "lname:asc":
+                lname = "lname:desc"
+                break
+            case "lname:desc":
+                lname = "lname:asc"
+                break
+            default:
+                throw new Error(`Invalid value for sortOptions.lname = ${sortOptions.lname}`)
+        }
+        setSortOptions({...blankSortOptions, lname})
+        
     }
     const sortByAge = () => {
-        window.alert("Sorting by Age!")
         let age = ""
         switch (sortOptions.age){
             case "":
@@ -127,7 +139,7 @@ const DataTable = () => {
                 age = "age:desc"
                 break
             case "age:desc":
-                age =""
+                    age = "age:asc"
                 break
             default:
                 throw new Error(`Invalid value for sortOptions.age = ${sortOptions.age}`)
@@ -135,10 +147,39 @@ const DataTable = () => {
         setSortOptions({...blankSortOptions, age})
     }
     const sortByJobTitle = () => {
-        window.alert("Sorting by Job!")
+        let job_title = ""
+        switch (sortOptions.job_title){
+            case "":
+                job_title = "job_title:asc"
+                break
+            case "job_title:asc":
+                job_title = "job_title:desc"
+                break
+            case "job_title:desc":
+                job_title = "job_title:asc"
+                break
+            default:
+                throw new Error(`Invalid value for sortOptions.job_title = ${sortOptions.job_title}`)
+        }
+        setSortOptions({...blankSortOptions, job_title})
     }
     const sortBySalary = () =>{
-        window.alert("Sorting by Salary!")
+        let salary = ""
+        switch (sortOptions.salary){
+            case "":
+                salary = "salary:asc"
+                break
+            case "salary:asc":
+                salary = "salary:desc"
+                break
+            case "salary:desc":
+                salary = "salary:asc"
+                break
+            default:
+                throw new Error(`Invalid value for sortOptions.salary = ${sortOptions.salary}`)
+        }
+        setSortOptions({...blankSortOptions, salary})
+        
     }
 
     const Sorter = ({handleSort}) =>{
