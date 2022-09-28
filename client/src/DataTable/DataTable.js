@@ -4,6 +4,12 @@ import Alert from 'react-bootstrap/Alert';
 import styles from './DataTable.module.css'
 
 
+const blankSortOptions = {
+    lname: "",
+    age:"",
+    salary: "",
+    job_title: ""
+}
 const makeParamString = (obj) =>{
     let str = '?sort='
     let vals = Object.values(obj)
@@ -12,19 +18,22 @@ const makeParamString = (obj) =>{
             str+=val+','
         }
     }
+    if (str === '?sort=') return ""
     return str.slice(0,-1)
 }
 
 
 const DataTable = () => {
-    const { navigateToAdd,  navigateToEdit, navigateToView} = React.useContext(UserContext)
+    const {navigateToEdit, navigateToView} = React.useContext(UserContext)
 
     const [data, setData] = useState([])
     const [alert, setAlert] = useState({visible: false, type: "primary", text: "Database updated"})
-    const [sortLastName, setSortLastName] = useState('lname:asc')
-    const [sortAge, setSortAge] = useState('age:asc')
-    const [salary, sortSalary] = useState('salary:asc')
-    const [jobTitle, sortJobTitle] = useState('job_title:asc')
+
+    const [sortOptions, setSortOptions] = useState(blankSortOptions)
+    // const [sortLastName, setSortLastName] = useState('lname:asc')
+    // const [sortAge, setSortAge] = useState('age:asc')
+    // const [salary, sortSalary] = useState('salary:asc')
+    // const [jobTitle, sortJobTitle] = useState('job_title:asc')
 
 
 
@@ -50,13 +59,15 @@ const DataTable = () => {
     useEffect(() => {
         const fetchData = async () => {
             const apiAddress = `http://localhost:3001/users`
-            const params = makeParamString({sortLastName, sortAge, salary, jobTitle})
+            const params = makeParamString(sortOptions)
+            console.log(apiAddress+params)
             const data = await fetch(apiAddress+params)
             const datajson = await data.json()
+            console.log(datajson)
             setData((x) => [...datajson])
         }
         fetchData().catch(console.error)
-    }, [alert])
+    }, [alert, sortOptions])
 
     const tableData = data.map((el) => {
         return (
@@ -107,6 +118,21 @@ const DataTable = () => {
     }
     const sortByAge = () => {
         window.alert("Sorting by Age!")
+        let age = ""
+        switch (sortOptions.age){
+            case "":
+                age = "age:asc"
+                break
+            case "age:asc":
+                age = "age:desc"
+                break
+            case "age:desc":
+                age =""
+                break
+            default:
+                throw new Error(`Invalid value for sortOptions.age = ${sortOptions.age}`)
+        }
+        setSortOptions({...blankSortOptions, age})
     }
     const sortByJobTitle = () => {
         window.alert("Sorting by Job!")

@@ -29,13 +29,18 @@ app.get("/", (req, res)=>{
 })
 
 app.get("/users", async (req, res) => {
-  const {sort} = req.query
-  const sortArr = sort.split(',')
-  const sortArrOfArr = sortArr.map(x=>x.split(':'))
-  const sortObj = Object.fromEntries(sortArrOfArr)
-  console.log(sortObj)
-
-  const q = "SELECT * FROM employee_table"
+  let q= "SELECT * FROM employee_table"
+  if (Object.keys(req.query).length!==0) {
+      const {sort} = req.query
+      const sortArr = sort.split(',')
+      const sortOpts = sortArr.map(x=>x.split(':'))
+      
+      q += " order by "
+      for (const [key, val] of sortOpts){
+          q+=`${key} ${val},`
+      }
+      q=q.slice(0,-1)
+  }
   try {
     const [result, field] = await pool.query(q)
       return res.status(200).json(result)
